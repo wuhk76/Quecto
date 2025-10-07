@@ -45,7 +45,7 @@ class Femto:
             del self.text[line]
     def clear(self):
         self.text = ['']
-femto = Femto()
+quecto = Femto()
 path = ''
 index = 0
 edit = False
@@ -58,86 +58,86 @@ while running:
     elif parts[0] == ':open':
         if len(parts) > 1:
             path = parts[1]
-            femto.read(path)
+            quecto.read(path)
             index = 0
             path = path.split('/')[-1]
     elif parts[0] == ':edit':
         previndex = index
         if len(parts) > 1 and parts[1].isdigit():
             newindex = int(parts[1])
-            if 0 <= newindex < len(femto.text):
+            if 0 <= newindex < len(quecto.text):
                 index = newindex
                 edit = True
     elif parts[0] == ':goto':
         if len(parts) > 1 and parts[1].isdigit():
             newindex = int(parts[1])
-            if 0 <= newindex < len(femto.text):
+            if 0 <= newindex < len(quecto.text):
                 index = newindex
     elif parts[0] == ':save':
         if len(parts) > 1:
-            femto.textpath = parts[1]
+            quecto.textpath = parts[1]
             path = parts[1].split('/')[-1]
-        femto.save()
+        quecto.save()
     elif parts[0] == ':print':
         if len(parts) > 1:
             if parts[1] == 'all':
-                femto.printall()
+                quecto.printall()
             elif parts[1].isdigit():
                 num = int(parts[1])
-                if 0 <= num < len(femto.text):
-                    femto.printline(num)
+                if 0 <= num < len(quecto.text):
+                    quecto.printline(num)
         else:
-            femto.printline(index)
+            quecto.printline(index)
     elif parts[0] == ':search':
         if len(parts) > 2:
             if parts[1] == 'all':
-                femto.searchall(parts[2])
+                quecto.searchall(parts[2])
             elif parts[1].isdigit():
                 linenum = int(parts[1])
-                if 0 <= linenum < len(femto.text):
-                    femto.search(linenum, parts[2])
+                if 0 <= linenum < len(quecto.text):
+                    quecto.search(linenum, parts[2])
         elif len(parts) > 1:
-            femto.search(index, parts[1])
+            quecto.search(index, parts[1])
     elif parts[0] == ':replace':
         if len(parts) > 3:
             if parts[1] == 'all':
-                femto.replaceall(parts[2], parts[3])
+                quecto.replaceall(parts[2], parts[3])
             elif parts[1].isdigit():
                 linenum = int(parts[1])
-                if 0 <= linenum < len(femto.text):
-                    femto.replace(linenum, parts[2], parts[3])
+                if 0 <= linenum < len(quecto.text):
+                    quecto.replace(linenum, parts[2], parts[3])
         elif len(parts) > 2:
-            femto.replace(index, parts[1], parts[2])
+            quecto.replace(index, parts[1], parts[2])
     elif parts[0] == ':delete':
         if len(parts) > 1:
             if parts[1] == 'all':
-                femto.clear()
+                quecto.clear()
                 index = 0
             elif parts[1].isdigit():
                 deline = int(parts[1])
-                if 0 <= deline < len(femto.text):
-                    femto.delete(deline)
+                if 0 <= deline < len(quecto.text):
+                    quecto.delete(deline)
                     if index > deline:
                         index -= 1
                     elif index == deline:
-                        index = min(index, len(femto.text) - 1)
+                        index = min(index, len(quecto.text) - 1)
                     if index < 0:
                         index = 0
         else:
-            femto.delete(index)
-            if index >= len(femto.text):
-                index = max(0, len(femto.text) - 1)
+            quecto.delete(index)
+            if index >= len(quecto.text):
+                index = max(0, len(quecto.text) - 1)
     elif parts[0] == ':head':
         index = 0
     elif parts[0] == ':tail':
-        index = len(femto.text) - 1 if femto.text else 0
+        index = len(quecto.text) - 1 if quecto.text else 0
     else:
         if not command.startswith(':'):
-            femto.write(index, command)
+            quecto.write(index, command)
             if edit:
                 edit = False
                 index = previndex
             else:
-                if index == len(femto.text) - 1:
-                    femto.text.append('')
+                if index == len(quecto.text) - 1:
+                    quecto.text.append('')
                 index += 1
