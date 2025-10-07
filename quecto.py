@@ -1,4 +1,4 @@
-class Femto:
+class Quecto:
     def __init__(self):
         self.text = ['']
         self.textpath = ''
@@ -45,7 +45,7 @@ class Femto:
             del self.text[line]
     def clear(self):
         self.text = ['']
-quecto = Femto()
+quecto = Quecto()
 path = ''
 index = 0
 edit = False
